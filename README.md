@@ -2,4 +2,4 @@
 ## Usage
 just read what's on the fucking screen
 ## Contributing
-like any other git repo, figure my code out it's not that big
+like any other git repo, figure my code out it's not that big. Requires [v](https://github.com/vlang/v)
