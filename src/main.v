@@ -1,5 +1,6 @@
 import os
 import rand
+import term
 
 //load file and split into array
 fn filearray(filee string) []string {
@@ -34,6 +35,7 @@ fn main() {
 			assert questions.len == answerses.len
 			mut i := 0
 			for {
+				term.clear()
 				useranswerse := os.input('${questions[i]}\n')
 				if useranswerse != answerses[i] {
 					mut confirmationsucceed := false
@@ -41,9 +43,7 @@ fn main() {
 						println(answerses[i])
 						confirmation := os.input('Is the answerse correct ((Y)es/(N)o)? ')
 						confirmationsucceed = true
-						if confirmation in nahh {
-							i++
-						}
+						if confirmation in nahh { i++ }
 						else if confirmation in yass {
 							questions.delete(i)
 							answerses.delete(i)
