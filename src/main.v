@@ -24,11 +24,13 @@ fn main() {
 	origanswerses := answerses.clone()
 	yass := ['Y', 'y', 'yes', 'Yes', 'YES']
 	nahh := ['N', 'n', 'no', 'No', 'NO']
-
+	totalquestions := questions.len
+	mut done := 0
 //check for same amount of questions and answerses, returns error if not
 	if questions.len != answerses.len {
 		panic("Not the same amount of questions and answerses")
 	}
+	// spaghetti bolognese
 	for {
 		shuffle(mut questions, mut answerses)
 		for questions.len != 0 {
@@ -36,6 +38,7 @@ fn main() {
 			mut i := 0
 			for {
 				term.clear()
+				println('${done}/${totalquestions')
 				useranswerse := os.input('${questions[i]}\n')
 				if useranswerse != answerses[i] {
 					mut confirmationsucceed := false
@@ -47,6 +50,7 @@ fn main() {
 						else if confirmation in yass {
 							questions.delete(i)
 							answerses.delete(i)
+							done++
 						}
 						else { confirmationsucceed = false } 
 					}
@@ -54,10 +58,18 @@ fn main() {
 				else {	
 					questions.delete(i)
 					answerses.delete(i)
+					done++
 				}
 				if i >= questions.len { i = 0 }
 				if i == 0 { break } 
 			}
+		}
+		term.clear()
+		if done == totalquestions {
+			println('${done}/${totalquestions}🥳')
+		}
+		else {
+			println('${done}/${totalquestions}')
 		}
 		if os.input('again? ') in nahh { break }
 		else {
