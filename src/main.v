@@ -26,6 +26,7 @@ fn main() {
 	nahh := ['N', 'n', 'no', 'No', 'NO']
 	totalquestions := questions.len
 	mut done := 0
+	mut question := 1
 //check for same amount of questions and answerses, returns error if not
 	if questions.len != answerses.len {
 		panic("Not the same amount of questions and answerses")
@@ -38,43 +39,36 @@ fn main() {
 			mut i := 0
 			for {
 				term.clear()
-				println('${done}/${totalquestions')
+				println('question ${question}\t\t${done}/${totalquestions} done')
 				useranswerse := os.input('${questions[i]}\n')
 				if useranswerse != answerses[i] {
-					mut confirmationsucceed := false
-					for confirmationsucceed == false {
-						println(answerses[i])
-						confirmation := os.input('Is the answerse correct ((Y)es/(N)o)? ')
-						confirmationsucceed = true
-						if confirmation in nahh { i++ }
-						else if confirmation in yass {
-							questions.delete(i)
-							answerses.delete(i)
-							done++
-						}
-						else { confirmationsucceed = false } 
+					println(answerses[i])
+					confirmation := os.input('Is the answerse correct (y/N)? ')
+					if confirmation in nahh { i++ }
+					else if confirmation in yass {
+						questions.delete(i)
+						answerses.delete(i)
+						done++
 					}
+					else { i++ } 
 				}
 				else {	
 					questions.delete(i)
-					answerses.delete(i)
+	 				answerses.delete(i)
 					done++
 				}
-				if i >= questions.len { i = 0 }
-				if i == 0 { break } 
+				if i >= questions.len { break }
+				question++
 			}
+			question = 1
 		}
 		term.clear()
-		if done == totalquestions {
-			println('${done}/${totalquestions}🥳')
-		}
-		else {
-			println('${done}/${totalquestions}')
-		}
+		println('${done}/${totalquestions}🥳')
 		if os.input('again? ') in nahh { break }
 		else {
 			answerses = origanswerses.clone()
 			questions = origquestions.clone()
+			done = 0
 		}
 	}
 }	
